@@ -1,0 +1,5 @@
+/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles/server.dir
+/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles/client.dir
+/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles/run.dir
+/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles/rebuild_cache.dir
