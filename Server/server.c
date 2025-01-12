@@ -35,6 +35,12 @@ void *game_update_thread(void *arg) {
             sem_post(sem_game_update);
             sleep(1);
             continue;
+        } else if (game->paused_message_sent) {
+            printf("Game paused. Waiting will move in 3 seconds...\n");
+            game->paused_message_sent = 0;
+            sem_post(sem_game_update);
+            sleep(3);
+            continue;
         }
 
         printf("Game update semaphore acquired.\n");
@@ -185,7 +191,13 @@ int main() {
                 game->player_status.active = 0;
                 sem_post(sem_game_update);
                 break;
-            } else {
+            }  else if (strcmp(buffer, "resume") == 0) {
+                sem_wait(sem_game_update);
+                game->player_status.paused = 0;
+                sem_post(sem_game_update);
+                printf("Waiting 3 seconds before resuming the game...\n");
+                sleep(3);
+            }else {
                 int new_direction = atoi(buffer);
                 sem_wait(sem_game_update);
                 change_direction(&game->snake, new_direction);
