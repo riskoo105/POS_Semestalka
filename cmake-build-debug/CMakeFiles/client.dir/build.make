@@ -72,44 +72,44 @@ include CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/codegen:
 .PHONY : CMakeFiles/client.dir/codegen
 
-CMakeFiles/client.dir/game_logic.c.o: CMakeFiles/client.dir/flags.make
-CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c
-CMakeFiles/client.dir/game_logic.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/game_logic.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/game_logic.c.o -MF CMakeFiles/client.dir/game_logic.c.o.d -o CMakeFiles/client.dir/game_logic.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c
+CMakeFiles/client.dir/Game_logic/game_logic.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/Game_logic/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c
+CMakeFiles/client.dir/Game_logic/game_logic.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/Game_logic/game_logic.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/Game_logic/game_logic.c.o -MF CMakeFiles/client.dir/Game_logic/game_logic.c.o.d -o CMakeFiles/client.dir/Game_logic/game_logic.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c
 
-CMakeFiles/client.dir/game_logic.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/client.dir/game_logic.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c > CMakeFiles/client.dir/game_logic.c.i
+CMakeFiles/client.dir/Game_logic/game_logic.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/client.dir/Game_logic/game_logic.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c > CMakeFiles/client.dir/Game_logic/game_logic.c.i
 
-CMakeFiles/client.dir/game_logic.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/client.dir/game_logic.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c -o CMakeFiles/client.dir/game_logic.c.s
+CMakeFiles/client.dir/Game_logic/game_logic.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/client.dir/Game_logic/game_logic.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c -o CMakeFiles/client.dir/Game_logic/game_logic.c.s
 
-CMakeFiles/client.dir/client.c.o: CMakeFiles/client.dir/flags.make
-CMakeFiles/client.dir/client.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/client.c
-CMakeFiles/client.dir/client.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/client.dir/client.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/client.c.o -MF CMakeFiles/client.dir/client.c.o.d -o CMakeFiles/client.dir/client.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/client.c
+CMakeFiles/client.dir/Client/client.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/Client/client.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Client/client.c
+CMakeFiles/client.dir/Client/client.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/client.dir/Client/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/Client/client.c.o -MF CMakeFiles/client.dir/Client/client.c.o.d -o CMakeFiles/client.dir/Client/client.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Client/client.c
 
-CMakeFiles/client.dir/client.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/client.dir/client.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/client.c > CMakeFiles/client.dir/client.c.i
+CMakeFiles/client.dir/Client/client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/client.dir/Client/client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Client/client.c > CMakeFiles/client.dir/Client/client.c.i
 
-CMakeFiles/client.dir/client.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/client.dir/client.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/client.c -o CMakeFiles/client.dir/client.c.s
+CMakeFiles/client.dir/Client/client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/client.dir/Client/client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Client/client.c -o CMakeFiles/client.dir/Client/client.c.s
 
 # Object files for target client
 client_OBJECTS = \
-"CMakeFiles/client.dir/game_logic.c.o" \
-"CMakeFiles/client.dir/client.c.o"
+"CMakeFiles/client.dir/Game_logic/game_logic.c.o" \
+"CMakeFiles/client.dir/Client/client.c.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
 
-client: CMakeFiles/client.dir/game_logic.c.o
-client: CMakeFiles/client.dir/client.c.o
+client: CMakeFiles/client.dir/Game_logic/game_logic.c.o
+client: CMakeFiles/client.dir/Client/client.c.o
 client: CMakeFiles/client.dir/build.make
 client: CMakeFiles/client.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable client"

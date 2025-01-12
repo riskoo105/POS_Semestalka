@@ -7,7 +7,7 @@
 #include <semaphore.h>
 #include <termios.h>
 
-#define PORT 8080
+#define PORT 45544
 #define BUFFER_SIZE 1024
 
 int sock; // Socket zdieľaný medzi vláknami

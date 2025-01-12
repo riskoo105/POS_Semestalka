@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/server.dir/game_logic.c.o CMakeFiles/server.dir/server.c.o -o server  -lpthread
+/usr/bin/cc -g CMakeFiles/server.dir/Game_logic/game_logic.c.o CMakeFiles/server.dir/Server/server.c.o -o server  -lpthread

@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/client.dir/game_logic.c.o CMakeFiles/client.dir/client.c.o -o client  -lpthread
+/usr/bin/cc -g CMakeFiles/client.dir/Game_logic/game_logic.c.o CMakeFiles/client.dir/Client/client.c.o -o client  -lpthread

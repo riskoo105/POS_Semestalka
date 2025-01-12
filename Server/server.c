@@ -8,9 +8,9 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <semaphore.h>
-#include "game_logic.h"
+#include "../Game_logic/game_logic.h"
 
-#define PORT 8080
+#define PORT 45544
 #define BUFFER_SIZE 1024
 
 Game *game;
@@ -85,7 +85,19 @@ void *game_update_thread(void *arg) {
     return NULL;
 }
 
-
+void cleanup_resources(int server_fd, int client_socket) {
+    if (server_fd >= 0) close(server_fd);
+    if (client_socket >= 0) close(client_socket);
+    if (sem_game_update) {
+        sem_close(sem_game_update);
+        sem_unlink("/game_update");
+    }
+    for (int i = 0; i < game->height; i++) {
+      free(game->obstacles[i]);
+    }
+    free(game->obstacles);
+    if (game) munmap(game, sizeof(Game));
+}
 
 int main() {
     int server_fd, client_socket;
@@ -227,14 +239,12 @@ int main() {
         send(client_socket, buffer, strlen(buffer), 0);
     }
 
-    // Clean up resources
-    pthread_join(game_thread, NULL);
-    close(client_socket);
-    close(server_fd);
+    snprintf(buffer, BUFFER_SIZE, "Game Over! Fruits eaten: %d", game->snake.length - 1);
+    send(client_socket, buffer, strlen(buffer), 0);
 
-    sem_close(sem_game_update);
-    sem_unlink("/game_update");
-    munmap(game, sizeof(Game));
+    pthread_join(game_thread, NULL);
+
+    cleanup_resources(server_fd, client_socket);
 
     printf("Server shutdown.\n");
     return 0;

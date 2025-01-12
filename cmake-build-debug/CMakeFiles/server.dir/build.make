@@ -72,44 +72,44 @@ include CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/codegen:
 .PHONY : CMakeFiles/server.dir/codegen
 
-CMakeFiles/server.dir/game_logic.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c
-CMakeFiles/server.dir/game_logic.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/game_logic.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/game_logic.c.o -MF CMakeFiles/server.dir/game_logic.c.o.d -o CMakeFiles/server.dir/game_logic.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c
+CMakeFiles/server.dir/Game_logic/game_logic.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/Game_logic/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c
+CMakeFiles/server.dir/Game_logic/game_logic.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/Game_logic/game_logic.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/Game_logic/game_logic.c.o -MF CMakeFiles/server.dir/Game_logic/game_logic.c.o.d -o CMakeFiles/server.dir/Game_logic/game_logic.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c
 
-CMakeFiles/server.dir/game_logic.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/game_logic.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c > CMakeFiles/server.dir/game_logic.c.i
+CMakeFiles/server.dir/Game_logic/game_logic.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/Game_logic/game_logic.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c > CMakeFiles/server.dir/Game_logic/game_logic.c.i
 
-CMakeFiles/server.dir/game_logic.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/game_logic.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c -o CMakeFiles/server.dir/game_logic.c.s
+CMakeFiles/server.dir/Game_logic/game_logic.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/Game_logic/game_logic.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c -o CMakeFiles/server.dir/Game_logic/game_logic.c.s
 
-CMakeFiles/server.dir/server.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/server.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/server.c
-CMakeFiles/server.dir/server.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/server.c.o -MF CMakeFiles/server.dir/server.c.o.d -o CMakeFiles/server.dir/server.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/server.c
+CMakeFiles/server.dir/Server/server.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Server/server.c
+CMakeFiles/server.dir/Server/server.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/Server/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/Server/server.c.o -MF CMakeFiles/server.dir/Server/server.c.o.d -o CMakeFiles/server.dir/Server/server.c.o -c /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Server/server.c
 
-CMakeFiles/server.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/server.c > CMakeFiles/server.dir/server.c.i
+CMakeFiles/server.dir/Server/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/Server/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Server/server.c > CMakeFiles/server.dir/Server/server.c.i
 
-CMakeFiles/server.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/server.c -o CMakeFiles/server.dir/server.c.s
+CMakeFiles/server.dir/Server/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/Server/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Server/server.c -o CMakeFiles/server.dir/Server/server.c.s
 
 # Object files for target server
 server_OBJECTS = \
-"CMakeFiles/server.dir/game_logic.c.o" \
-"CMakeFiles/server.dir/server.c.o"
+"CMakeFiles/server.dir/Game_logic/game_logic.c.o" \
+"CMakeFiles/server.dir/Server/server.c.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
-server: CMakeFiles/server.dir/game_logic.c.o
-server: CMakeFiles/server.dir/server.c.o
+server: CMakeFiles/server.dir/Game_logic/game_logic.c.o
+server: CMakeFiles/server.dir/Server/server.c.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable server"

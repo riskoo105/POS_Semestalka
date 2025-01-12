@@ -155,80 +155,80 @@ run/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
 .PHONY : run/fast
 
-client.o: client.c.o
-.PHONY : client.o
+Client/client.o: Client/client.c.o
+.PHONY : Client/client.o
 
 # target to build an object file
-client.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.c.o
-.PHONY : client.c.o
+Client/client.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Client/client.c.o
+.PHONY : Client/client.c.o
 
-client.i: client.c.i
-.PHONY : client.i
+Client/client.i: Client/client.c.i
+.PHONY : Client/client.i
 
 # target to preprocess a source file
-client.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.c.i
-.PHONY : client.c.i
+Client/client.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Client/client.c.i
+.PHONY : Client/client.c.i
 
-client.s: client.c.s
-.PHONY : client.s
+Client/client.s: Client/client.c.s
+.PHONY : Client/client.s
 
 # target to generate assembly for a file
-client.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.c.s
-.PHONY : client.c.s
+Client/client.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Client/client.c.s
+.PHONY : Client/client.c.s
 
-game_logic.o: game_logic.c.o
-.PHONY : game_logic.o
+Game_logic/game_logic.o: Game_logic/game_logic.c.o
+.PHONY : Game_logic/game_logic.o
 
 # target to build an object file
-game_logic.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game_logic.c.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/game_logic.c.o
-.PHONY : game_logic.c.o
+Game_logic/game_logic.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Game_logic/game_logic.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Game_logic/game_logic.c.o
+.PHONY : Game_logic/game_logic.c.o
 
-game_logic.i: game_logic.c.i
-.PHONY : game_logic.i
+Game_logic/game_logic.i: Game_logic/game_logic.c.i
+.PHONY : Game_logic/game_logic.i
 
 # target to preprocess a source file
-game_logic.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game_logic.c.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/game_logic.c.i
-.PHONY : game_logic.c.i
+Game_logic/game_logic.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Game_logic/game_logic.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Game_logic/game_logic.c.i
+.PHONY : Game_logic/game_logic.c.i
 
-game_logic.s: game_logic.c.s
-.PHONY : game_logic.s
+Game_logic/game_logic.s: Game_logic/game_logic.c.s
+.PHONY : Game_logic/game_logic.s
 
 # target to generate assembly for a file
-game_logic.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game_logic.c.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/game_logic.c.s
-.PHONY : game_logic.c.s
+Game_logic/game_logic.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Game_logic/game_logic.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Game_logic/game_logic.c.s
+.PHONY : Game_logic/game_logic.c.s
 
-server.o: server.c.o
-.PHONY : server.o
+Server/server.o: Server/server.c.o
+.PHONY : Server/server.o
 
 # target to build an object file
-server.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.o
-.PHONY : server.c.o
+Server/server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Server/server.c.o
+.PHONY : Server/server.c.o
 
-server.i: server.c.i
-.PHONY : server.i
+Server/server.i: Server/server.c.i
+.PHONY : Server/server.i
 
 # target to preprocess a source file
-server.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.i
-.PHONY : server.c.i
+Server/server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Server/server.c.i
+.PHONY : Server/server.c.i
 
-server.s: server.c.s
-.PHONY : server.s
+Server/server.s: Server/server.c.s
+.PHONY : Server/server.s
 
 # target to generate assembly for a file
-server.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.s
-.PHONY : server.c.s
+Server/server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Server/server.c.s
+.PHONY : Server/server.c.s
 
 # Help Target
 help:
@@ -241,15 +241,15 @@ help:
 	@echo "... run"
 	@echo "... client"
 	@echo "... server"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
-	@echo "... game_logic.o"
-	@echo "... game_logic.i"
-	@echo "... game_logic.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... Client/client.o"
+	@echo "... Client/client.i"
+	@echo "... Client/client.s"
+	@echo "... Game_logic/game_logic.o"
+	@echo "... Game_logic/game_logic.i"
+	@echo "... Game_logic/game_logic.s"
+	@echo "... Server/server.o"
+	@echo "... Server/server.i"
+	@echo "... Server/server.s"
 .PHONY : help
 
 

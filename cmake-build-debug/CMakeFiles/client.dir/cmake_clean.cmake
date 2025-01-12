@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/client.dir/client.c.o"
-  "CMakeFiles/client.dir/client.c.o.d"
-  "CMakeFiles/client.dir/game_logic.c.o"
-  "CMakeFiles/client.dir/game_logic.c.o.d"
+  "CMakeFiles/client.dir/Client/client.c.o"
+  "CMakeFiles/client.dir/Client/client.c.o.d"
+  "CMakeFiles/client.dir/Game_logic/game_logic.c.o"
+  "CMakeFiles/client.dir/Game_logic/game_logic.c.o.d"
   "client"
   "client.pdb"
 )

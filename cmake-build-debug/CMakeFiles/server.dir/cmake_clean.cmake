@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/server.dir/game_logic.c.o"
-  "CMakeFiles/server.dir/game_logic.c.o.d"
-  "CMakeFiles/server.dir/server.c.o"
-  "CMakeFiles/server.dir/server.c.o.d"
+  "CMakeFiles/server.dir/Game_logic/game_logic.c.o"
+  "CMakeFiles/server.dir/Game_logic/game_logic.c.o.d"
+  "CMakeFiles/server.dir/Server/server.c.o"
+  "CMakeFiles/server.dir/Server/server.c.o.d"
   "server"
   "server.pdb"
 )

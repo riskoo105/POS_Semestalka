@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/game_logic.c" "CMakeFiles/server.dir/game_logic.c.o" "gcc" "CMakeFiles/server.dir/game_logic.c.o.d"
-  "/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/server.c" "CMakeFiles/server.dir/server.c.o" "gcc" "CMakeFiles/server.dir/server.c.o.d"
+  "/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Game_logic/game_logic.c" "CMakeFiles/server.dir/Game_logic/game_logic.c.o" "gcc" "CMakeFiles/server.dir/Game_logic/game_logic.c.o.d"
+  "/mnt/c/Users/risko/CLionProjects/SemestralnaPracaHad/Server/server.c" "CMakeFiles/server.dir/Server/server.c.o" "gcc" "CMakeFiles/server.dir/Server/server.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

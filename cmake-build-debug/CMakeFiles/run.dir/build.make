@@ -69,7 +69,7 @@ include CMakeFiles/run.dir/progress.make
 CMakeFiles/run: server
 CMakeFiles/run: client
 	./server &
-	./client
+	sleep 1 && ./client
 
 CMakeFiles/run.dir/codegen:
 .PHONY : CMakeFiles/run.dir/codegen
