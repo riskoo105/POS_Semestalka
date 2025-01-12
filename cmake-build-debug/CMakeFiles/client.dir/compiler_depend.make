@@ -16,6 +16,7 @@ CMakeFiles/client.dir/client.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPr
   /usr/include/netinet/in.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -50,6 +51,7 @@ CMakeFiles/client.dir/client.c.o: /mnt/c/Users/risko/CLionProjects/SemestralnaPr
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/socket.h \
@@ -216,6 +218,16 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
@@ -226,9 +238,9 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 
 /usr/include/features.h:
 
-/usr/include/netinet/in.h:
-
 /usr/include/pthread.h:
+
+/usr/include/netinet/in.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
@@ -259,6 +271,12 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 /usr/include/stdio.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/stdc-predef.h:
 
 /usr/include/asm-generic/bitsperlong.h:
 
@@ -300,31 +318,27 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 
 /usr/include/x86_64-linux-gnu/bits/socket.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/include/stdc-predef.h:
-
 /usr/include/asm-generic/sockios.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/socket_type.h:
 
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/sched.h:
+
 /usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/semaphore.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h:
 
 /usr/include/x86_64-linux-gnu/bits/termios-c_oflag.h:
-
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/sched.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -349,6 +363,8 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 /usr/include/x86_64-linux-gnu/bits/termios-baud.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
 
 /usr/include/x86_64-linux-gnu/bits/sockaddr.h:
 
@@ -376,10 +392,6 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 
 /usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/termios-struct.h:
 
 /usr/include/x86_64-linux-gnu/bits/termios-tcflow.h:
@@ -395,9 +407,3 @@ CMakeFiles/client.dir/game_logic.c.o: /mnt/c/Users/risko/CLionProjects/Semestral
 /usr/include/x86_64-linux-gnu/bits/termios-misc.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:

@@ -17,6 +17,7 @@ CMakeFiles/client.dir/client.c.o
  /usr/include/netinet/in.h
  /usr/include/pthread.h
  /usr/include/sched.h
+ /usr/include/semaphore.h
  /usr/include/stdc-predef.h
  /usr/include/stdio.h
  /usr/include/stdlib.h
@@ -51,6 +52,7 @@ CMakeFiles/client.dir/client.c.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/sched.h
  /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h
  /usr/include/x86_64-linux-gnu/bits/setjmp.h
  /usr/include/x86_64-linux-gnu/bits/sockaddr.h
  /usr/include/x86_64-linux-gnu/bits/socket.h

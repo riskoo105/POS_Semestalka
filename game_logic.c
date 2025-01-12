@@ -52,15 +52,17 @@ void initialize_game(Game *game, int width, int height, int mode, int time_limit
 
 
 int move_snake(Game *game) {
-    if (!game->snake.alive) return 0;
+    if (!game->snake.alive || game->player_status.paused) {
+        return 0; // Ak je hra pozastavená alebo had mŕtvy, nevykonávame pohyb
+    }
 
     Point head = game->snake.body[0];
 
     switch (game->snake.direction) {
-        case 0: head.y -= 1; break; // Up
-        case 1: head.x += 1; break; // Right
-        case 2: head.y += 1; break; // Down
-        case 3: head.x -= 1; break; // Left
+        case 0: head.y -= 1; break; // Hore
+        case 1: head.x += 1; break; // Vpravo
+        case 2: head.y += 1; break; // Dole
+        case 3: head.x -= 1; break; // Vľavo
     }
 
     if (head.x < 0 || head.x >= game->width || head.y < 0 || head.y >= game->height) {

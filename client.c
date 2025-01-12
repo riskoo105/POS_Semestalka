@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <termios.h>
 
 #define PORT 8080
@@ -11,6 +12,7 @@
 
 int sock; // Socket zdieľaný medzi vláknami
 pthread_mutex_t send_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex pre odosielanie správ
+int game_active = 0; // Indikátor aktívnej hry
 
 // Konfigurácia terminálu na raw mode
 void enable_raw_mode() {
@@ -34,11 +36,16 @@ void *receive_updates(void *arg) {
     while (1) {
         int bytes_read = read(sock, buffer, BUFFER_SIZE);
         if (bytes_read <= 0) {
-            printf("Server disconnected\n");
+            printf("Server odpojený\n");
             exit(0);
         }
         buffer[bytes_read] = '\0';
         printf("\nServer: %s\n", buffer);
+
+        // Ak server hlási ukončenie hry, deaktivujeme hru
+        if (strstr(buffer, "Game Over") != NULL) {
+            game_active = 0;
+        }
     }
     return NULL;
 }
@@ -47,7 +54,7 @@ void *receive_updates(void *arg) {
 void *send_updates(void *arg) {
     enable_raw_mode();
     printf("Ovládajte hada pomocou W (hore), A (vľavo), S (dole), D (vpravo).\n");
-    printf("Stlačte 'p' pre pozastavenie, 'r' pre obnovenie a 'q' pre ukončenie hry.\n");
+    printf("Stlačte 'p' pre pozastavenie a 'q' pre ukončenie hry.\n");
 
     char ch;
     char buffer[BUFFER_SIZE];
@@ -55,19 +62,16 @@ void *send_updates(void *arg) {
         if (ch == 'q') {
             snprintf(buffer, BUFFER_SIZE, "quit");
             send(sock, buffer, strlen(buffer), 0);
+            game_active = 0;
             break;
         } else if (ch == 'p') {
             snprintf(buffer, BUFFER_SIZE, "pause");
-            printf("Sending pause command to server.\n");
-            if (send(sock, buffer, strlen(buffer), 0) < 0) {
-                perror("Error sending pause command");
-            }
+            send(sock, buffer, strlen(buffer), 0);
+            break;
         } else if (ch == 'r') {
             snprintf(buffer, BUFFER_SIZE, "resume");
-            printf("Sending resume command to server: %s\n", buffer);
-            if (send(sock, buffer, strlen(buffer), 0) < 0) {
-                perror("Error sending resume command");
-            }
+            send(sock, buffer, strlen(buffer), 0);
+            sleep(3); // Čakanie pred obnovením hry
         } else {
             int direction = -1;
 
@@ -88,38 +92,10 @@ void *send_updates(void *arg) {
     }
 
     disable_raw_mode();
-    close(sock);
-    exit(0);
+    return NULL;
 }
 
-int main() {
-    struct sockaddr_in serv_addr;
-    pthread_t receive_thread, send_thread;
-
-    // Vytvorenie socketu
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        perror("Socket creation failed");
-        return -1;
-    }
-
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
-
-    // Konverzia IPv4 adresy
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
-        perror("Invalid address or address not supported");
-        return -1;
-    }
-
-    // Pripojenie k serveru
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-        perror("Connection failed");
-        return -1;
-    }
-
-    printf("Pripojené k serveru\n");
-
-    // Získanie nastavení hry od používateľa
+void start_new_game() {
     int width, height, game_mode, world_type, time_limit = 0;
     printf("Zadajte šírku herného sveta: ");
     scanf("%d", &width);
@@ -128,7 +104,7 @@ int main() {
     printf("Vyberte režim hry (0 = Štandardný, 1 = Na čas): ");
     scanf("%d", &game_mode);
 
-    if (game_mode == 1) { // Časový režim
+    if (game_mode == 1) {
         printf("Zadajte časový limit v sekundách: ");
         scanf("%d", &time_limit);
     }
@@ -136,26 +112,88 @@ int main() {
     printf("Vyberte typ sveta (0 = Bez prekážok, 1 = S prekážkami): ");
     scanf("%d", &world_type);
 
-    // Odoslanie nastavení hry serveru
     char buffer[BUFFER_SIZE];
     snprintf(buffer, BUFFER_SIZE, "%d %d %d %d %d", width, height, game_mode, time_limit, world_type);
-    if (send(sock, buffer, strlen(buffer), 0) < 0) {
-        perror("Error sending game settings to server");
-        exit(1);
-    }
+    pthread_mutex_lock(&send_mutex);
     send(sock, buffer, strlen(buffer), 0);
+    pthread_mutex_unlock(&send_mutex);
+    game_active = 1;
+}
 
-    // Vytvorenie vlákien na odosielanie a prijímanie
+void main_menu() {
+    int choice;
+    while (1) {
+        printf("\n--- Hlavné Menu ---\n");
+        printf("1. Nová hra\n");
+        printf("2. Pokračovanie v hre\n");
+        printf("3. Quit\n");
+        printf("Vaša voľba: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                start_new_game();
+                pthread_t send_thread;
+                pthread_create(&send_thread, NULL, send_updates, NULL);
+                pthread_join(send_thread, NULL);
+                break;
+            case 2:
+                if (game_active) {
+                    printf("Obnovujem hru...\n");
+                    char buffer[BUFFER_SIZE];
+                    snprintf(buffer, BUFFER_SIZE, "resume");
+                    pthread_mutex_lock(&send_mutex);
+                    send(sock, buffer, strlen(buffer), 0);
+                    pthread_mutex_unlock(&send_mutex);
+
+                    pthread_t resume_thread;
+                    pthread_create(&resume_thread, NULL, send_updates, NULL);
+                    pthread_join(resume_thread, NULL);
+                } else {
+                    printf("Nie je aktívna žiadna hra na pokračovanie.\n");
+                }
+                break;
+            case 3:
+                printf("Ukončujem aplikáciu...\n");
+                close(sock);
+                exit(0);
+            default:
+                printf("Neplatná voľba. Skúste znova.\n");
+        }
+    }
+}
+
+int main() {
+    struct sockaddr_in serv_addr;
+    pthread_t receive_thread;
+
+    // Skúste sa pripojiť k serveru
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (sock < 0) {
+        perror("Socket creation failed");
+        return -1;
+    }
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+        perror("Invalid address or address not supported");
+        return -1;
+    }
+
+    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        perror("Connection failed");
+        return -1;
+    }
+
+    printf("Pripojené k serveru\n");
     pthread_create(&receive_thread, NULL, receive_updates, NULL);
-    pthread_create(&send_thread, NULL, send_updates, NULL);
 
-    // Čakanie na ukončenie vlákien
-    pthread_join(send_thread, NULL);
+    main_menu();
+
     pthread_cancel(receive_thread);
-
-    // Uvoľnenie zdrojov
     pthread_mutex_destroy(&send_mutex);
     close(sock);
     return 0;
 }
-
