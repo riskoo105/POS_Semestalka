@@ -22,6 +22,11 @@ typedef struct {
 } Snake;
 
 typedef struct {
+    int paused; // Indikátor, či je hra pozastavená (1 = áno, 0 = nie)
+    int active; // Indikátor, či je hráč aktívny (1 = áno, 0 = nie)
+} PlayerStatus;
+
+typedef struct {
     int width;
     int height;
     Snake snake;
@@ -31,6 +36,8 @@ typedef struct {
     time_t start_time;    // Start time of the game
     int world_type;       // Type of world: WORLD_NO_OBSTACLES or WORLD_WITH_OBSTACLES
     int **obstacles;      // 2D array for obstacles
+    PlayerStatus player_status; // Stav hráča
+    int paused_message_sent;
 } Game;
 
 int points_equal(Point a, Point b);

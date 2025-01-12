@@ -46,33 +46,50 @@ void *receive_updates(void *arg) {
 // Funkcia pre odosielanie vstupov serveru
 void *send_updates(void *arg) {
     enable_raw_mode();
-    printf("Ovládajte hada pomocou W (hore), A (vľavo), S (dole), D (vpravo). Stlačte 'q' pre ukončenie.\n");
+    printf("Ovládajte hada pomocou W (hore), A (vľavo), S (dole), D (vpravo).\n");
+    printf("Stlačte 'p' pre pozastavenie, 'r' pre obnovenie a 'q' pre ukončenie hry.\n");
 
     char ch;
     char buffer[BUFFER_SIZE];
-    while (read(STDIN_FILENO, &ch, 1) == 1 && ch != 'q') {
-        int direction = -1;
-
-        // Mapovanie vstupov na smery
-        switch (ch) {
-            case 'w': direction = 0; break; // Hore
-            case 'd': direction = 1; break; // Vpravo
-            case 's': direction = 2; break; // Dole
-            case 'a': direction = 3; break; // Vľavo
-        }
-
-        if (direction != -1) {
-            snprintf(buffer, BUFFER_SIZE, "%d", direction);
-            pthread_mutex_lock(&send_mutex);
+    while (read(STDIN_FILENO, &ch, 1) == 1) {
+        if (ch == 'q') {
+            snprintf(buffer, BUFFER_SIZE, "quit");
             send(sock, buffer, strlen(buffer), 0);
-            pthread_mutex_unlock(&send_mutex);
+            break;
+        } else if (ch == 'p') {
+            snprintf(buffer, BUFFER_SIZE, "pause");
+            printf("Sending pause command to server.\n");
+            if (send(sock, buffer, strlen(buffer), 0) < 0) {
+                perror("Error sending pause command");
+            }
+        } else if (ch == 'r') {
+            snprintf(buffer, BUFFER_SIZE, "resume");
+            printf("Sending resume command to server: %s\n", buffer);
+            if (send(sock, buffer, strlen(buffer), 0) < 0) {
+                perror("Error sending resume command");
+            }
+        } else {
+            int direction = -1;
+
+            switch (ch) {
+                case 'w': direction = 0; break;
+                case 'd': direction = 1; break;
+                case 's': direction = 2; break;
+                case 'a': direction = 3; break;
+            }
+
+            if (direction != -1) {
+                snprintf(buffer, BUFFER_SIZE, "%d", direction);
+                pthread_mutex_lock(&send_mutex);
+                send(sock, buffer, strlen(buffer), 0);
+                pthread_mutex_unlock(&send_mutex);
+            }
         }
     }
 
     disable_raw_mode();
     close(sock);
-    exit(0); // Ukončenie aplikácie po stlačení 'q'
-    return NULL;
+    exit(0);
 }
 
 int main() {
@@ -103,7 +120,11 @@ int main() {
     printf("Pripojené k serveru\n");
 
     // Získanie nastavení hry od používateľa
-    int game_mode, world_type, time_limit = 0;
+    int width, height, game_mode, world_type, time_limit = 0;
+    printf("Zadajte šírku herného sveta: ");
+    scanf("%d", &width);
+    printf("Zadajte výšku herného sveta: ");
+    scanf("%d", &height);
     printf("Vyberte režim hry (0 = Štandardný, 1 = Na čas): ");
     scanf("%d", &game_mode);
 
@@ -117,7 +138,11 @@ int main() {
 
     // Odoslanie nastavení hry serveru
     char buffer[BUFFER_SIZE];
-    snprintf(buffer, BUFFER_SIZE, "%d %d %d", game_mode, time_limit, world_type);
+    snprintf(buffer, BUFFER_SIZE, "%d %d %d %d %d", width, height, game_mode, time_limit, world_type);
+    if (send(sock, buffer, strlen(buffer), 0) < 0) {
+        perror("Error sending game settings to server");
+        exit(1);
+    }
     send(sock, buffer, strlen(buffer), 0);
 
     // Vytvorenie vlákien na odosielanie a prijímanie
@@ -133,3 +158,4 @@ int main() {
     close(sock);
     return 0;
 }
+

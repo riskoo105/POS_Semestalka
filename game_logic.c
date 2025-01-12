@@ -21,9 +21,15 @@ void initialize_game(Game *game, int width, int height, int mode, int time_limit
     game->start_time = time(NULL);
     game->world_type = world_type;
 
+    // Inicializácia stavu hráča
+    game->player_status.active = 1;
+    game->player_status.paused = 0;
+
+    game->paused_message_sent = 0;
+
     srand(time(NULL));
 
-    // Allocate memory for the obstacle array
+    // Alokácia prekážok
     game->obstacles = malloc(height * sizeof(int *));
     for (int i = 0; i < height; i++) {
         game->obstacles[i] = calloc(width, sizeof(int));
@@ -33,16 +39,17 @@ void initialize_game(Game *game, int width, int height, int mode, int time_limit
         for (int i = 0; i < width * height / 10; i++) {
             int x, y;
             do {
-                x = rand() % (width - 2) + 1; // Avoid borders
-                y = rand() % (height - 2) + 1; // Avoid borders
+                x = rand() % (width - 2) + 1;
+                y = rand() % (height - 2) + 1;
             } while (points_equal((Point){x, y}, game->snake.body[0]) || game->obstacles[y][x] == 1);
 
-            game->obstacles[y][x] = 1; // Place obstacle
+            game->obstacles[y][x] = 1;
         }
     }
 
     generate_fruit(game);
 }
+
 
 int move_snake(Game *game) {
     if (!game->snake.alive) return 0;

@@ -20,49 +20,70 @@ void *game_update_thread(void *arg) {
     printf("Game update thread started.\n");
 
     while (game->snake.alive) {
-        printf("Waiting for game update semaphore...\n");
-        if (sem_wait(sem_game_update) == 0) {
-            printf("Game update semaphore acquired.\n");
+        sem_wait(sem_game_update);
 
-            // Clear console for new game state
-            printf("\033[H\033[J");
-
-            // Check for timed game mode
-            if (game->mode == TIMED) {
-                time_t current_time = time(NULL);
-                if (difftime(current_time, game->start_time) >= game->time_limit) {
-                    printf("Time's up! Game over.\n");
-                    game->snake.alive = 0;
-                }
-            }
-
-            // Move snake and handle collisions
-            if (game->snake.alive && !move_snake(game)) {
-                printf("Game over: Snake hit an obstacle or itself.\n");
-                game->snake.alive = 0;
-            }
-
-            // Check if the snake eats the fruit
-            if (points_equal(game->snake.body[0], game->fruit)) {
-                game->snake.length += 1;
-                generate_fruit(game);
-            }
-
-            // Draw the current game state
-            draw_game(game);
-
-            printf("Releasing game update semaphore...\n");
+        // Kontrola, či je hráč aktívny
+        if (!game->player_status.active) {
+            printf("Player has left the game. Snake removed.\n");
             sem_post(sem_game_update);
-        } else {
-            perror("sem_wait failed");
+            break;
         }
 
+        // Kontrola, či je hra pozastavená
+        if (game->player_status.paused) {
+            if (!game->paused_message_sent) {
+                printf("Game paused. Waiting for player to resume...\n");
+                game->paused_message_sent = 1;
+            }
+            sem_post(sem_game_update);
+            sleep(1); // Počas pozastavenia hry čaká vlákno
+            continue;
+        } else if (game->paused_message_sent) {
+            // Hra bola obnovená, čakajte 3 sekundy pred pohybom
+            printf("Game resumed. Snake will move in 3 seconds...\n");
+            game->paused_message_sent = 0;
+            sem_post(sem_game_update);
+            sleep(3); // Čakanie pred obnovením pohybu
+            continue;
+        }
+
+        printf("Game update semaphore acquired.\n");
+
+        // Clear console for new game state
+        printf("\033[H\033[J");
+
+        // Check for timed game mode
+        if (game->mode == TIMED) {
+            time_t current_time = time(NULL);
+            if (difftime(current_time, game->start_time) >= game->time_limit) {
+                printf("Time's up! Game over.\n");
+                game->snake.alive = 0;
+            }
+        }
+
+        // Move snake and handle collisions
+        if (game->snake.alive && !move_snake(game)) {
+            printf("Game over: Snake hit an obstacle or itself.\n");
+            game->snake.alive = 0;
+        }
+
+        // Check if the snake eats the fruit
+        if (points_equal(game->snake.body[0], game->fruit)) {
+            game->snake.length += 1;
+            generate_fruit(game);
+        }
+
+        // Draw the current game state
+        draw_game(game);
+
+        sem_post(sem_game_update);
         sleep(2);
     }
 
     printf("Game update thread finished.\n");
     return NULL;
 }
+
 
 
 int main() {
@@ -102,6 +123,13 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
+    // možnosť SO_REUSEADDR na serverovom sockete
+    int opt = 1;
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+        perror("setsockopt failed");
+        exit(EXIT_FAILURE);
+    }
+
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
@@ -118,7 +146,7 @@ int main() {
 
     printf("Server is listening on port %d\n", PORT);
 
-    // Accept client connection
+    // Pripojenie klienta
     if ((client_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0) {
         perror("Accept failed");
         exit(EXIT_FAILURE);
@@ -126,14 +154,14 @@ int main() {
 
     printf("Client connected\n");
 
-    // Receive game settings from the client
+    // Prijatie nastavení hry od klienta
     int bytes_read = read(client_socket, buffer, BUFFER_SIZE);
     if (bytes_read > 0) {
-        int game_mode, time_limit, world_type;
-        sscanf(buffer, "%d %d %d", &game_mode, &time_limit, &world_type);
-        initialize_game(game, 20, 10, game_mode, time_limit, world_type);
-        printf("Game initialized: Mode=%d, Time Limit=%d, World Type=%d\n",
-               game_mode, time_limit, world_type);
+        int width, height, game_mode, time_limit, world_type;
+        sscanf(buffer, "%d %d %d %d %d", &width, &height, &game_mode, &time_limit, &world_type);
+        initialize_game(game, width, height, game_mode, time_limit, world_type);
+        printf("Game initialized: Width=%d, Height=%d, Mode=%d, Time Limit=%d, World Type=%d\n",
+               width, height, game_mode, time_limit, world_type);
     } else {
         printf("Failed to receive game settings from client.\n");
     }
@@ -151,11 +179,43 @@ int main() {
     while (game->snake.alive) {
         bytes_read = read(client_socket, buffer, BUFFER_SIZE);
         if (bytes_read > 0) {
-            int new_direction = atoi(buffer);
-            printf("Received input from client: %d\n", new_direction);
-            sem_wait(sem_game_update);
-            change_direction(&game->snake, new_direction);
-            sem_post(sem_game_update);
+            buffer[bytes_read] = '\0'; // Zabezpečte správne ukončenie reťazca
+            printf("Received from client: %s\n", buffer);
+
+            if (strcmp(buffer, "pause") == 0) {
+                printf("Player paused the game.\n");
+                sem_wait(sem_game_update);
+                printf("Semaphore acquired.\n");
+                printf("Setting game->player_status.paused = 1\n");
+                game->player_status.paused = 1;
+                sem_post(sem_game_update);
+                printf("Semaphore released.\n");
+            } else if (strcmp(buffer, "resume") == 0) {
+                printf("Player resumed the game.\n");
+                sem_wait(sem_game_update);
+                game->player_status.paused = 0;
+                sem_post(sem_game_update);
+                printf("Waiting 3 seconds before resuming the game...\n");
+                sleep(3);
+            } else if (strcmp(buffer, "quit") == 0) {
+                printf("Player quit the game.\n");
+                sem_wait(sem_game_update);
+                game->player_status.active = 0;
+                sem_post(sem_game_update);
+                break;
+            } else {
+                int new_direction = atoi(buffer);
+                printf("Received direction: %d\n", new_direction);
+                sem_wait(sem_game_update);
+                change_direction(&game->snake, new_direction);
+                sem_post(sem_game_update);
+            }
+        } else if (bytes_read == 0) {
+            printf("Client disconnected.\n");
+            break;
+        } else {
+            perror("Error reading from client");
+            break;
         }
 
         // Send game state to the client
