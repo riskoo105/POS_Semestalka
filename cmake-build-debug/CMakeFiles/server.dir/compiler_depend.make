@@ -109,10 +109,6 @@ CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/Semest
   /usr/include/x86_64-linux-gnu/bits/in.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
-  /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
-  /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
-  /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
-  /usr/include/x86_64-linux-gnu/bits/mman.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
@@ -169,7 +165,6 @@ CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/Semest
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
-  /usr/include/x86_64-linux-gnu/sys/mman.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/socket.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
@@ -178,8 +173,6 @@ CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/Semest
 
 
 /usr/include/x86_64-linux-gnu/sys/socket.h:
-
-/usr/include/x86_64-linux-gnu/sys/mman.h:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
@@ -204,12 +197,6 @@ CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/Semest
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-
-/usr/include/x86_64-linux-gnu/bits/mman.h:
-
-/usr/include/x86_64-linux-gnu/bits/mman-shared.h:
-
-/usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h:
 
 /usr/include/x86_64-linux-gnu/bits/in.h:
 
@@ -246,8 +233,6 @@ CMakeFiles/server.dir/Server/server.c.o: /mnt/c/Users/risko/CLionProjects/Semest
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/x86_64-linux-gnu/bits/mman-linux.h:
 
 /usr/include/endian.h:
 
