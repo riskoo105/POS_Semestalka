@@ -40,15 +40,20 @@ void *receive_updates(void *arg) {
             exit(0);
         }
         buffer[bytes_read] = '\0';
-        printf("\nServer: %s\n", buffer);
 
-        // Ak server hlási ukončenie hry, deaktivujeme hru
+        // Vymaž obrazovku a vykresli hernú mapu
+        printf("\033[H\033[J"); // Escape sekvencie na vyčistenie terminálu
+        printf("%s\n", buffer);
+
+        // Kontrola ukončenia hry
         if (strstr(buffer, "Game Over") != NULL) {
             game_active = 0;
+            break;
         }
     }
     return NULL;
 }
+
 
 // Funkcia pre odosielanie vstupov serveru
 void *send_updates(void *arg) {

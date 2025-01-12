@@ -14,8 +14,36 @@
 Game *game;
 sem_t *sem_game_update;
 
+void draw_game_to_buffer(const Game *game, char *buffer) {
+    int index = 0;
+    for (int y = 0; y < game->height; y++) {
+        for (int x = 0; x < game->width; x++) {
+            if (x == 0 || x == game->width - 1 || y == 0 || y == game->height - 1) {
+                buffer[index++] = '#';
+            } else if (game->world_type == WORLD_WITH_OBSTACLES && game->obstacles[y][x] == 1) {
+                buffer[index++] = '#';
+            } else if (points_equal(game->fruit, (Point){x, y})) {
+                buffer[index++] = 'F';
+            } else {
+                int is_snake = 0;
+                for (int i = 0; i < game->snake.length; i++) {
+                    if (points_equal(game->snake.body[i], (Point){x, y})) {
+                        is_snake = 1;
+                        break;
+                    }
+                }
+                buffer[index++] = is_snake ? 'O' : '.';
+            }
+        }
+        buffer[index++] = '\n'; // Ukončenie riadku
+    }
+    buffer[index] = '\0'; // Null terminátor
+}
+
 // Thread to handle periodic game updates
 void *game_update_thread(void *arg) {
+    int client_socket = *(int *)arg;
+    char game_buffer[BUFFER_SIZE];
     printf("Game update thread started.\n");
 
     while (game->snake.alive) {
@@ -65,7 +93,8 @@ void *game_update_thread(void *arg) {
             generate_fruit(game);
         }
 
-        draw_game(game);
+        draw_game_to_buffer(game, game_buffer);
+        send(client_socket, game_buffer, strlen(game_buffer), 0); // Odoslanie hernej mapy
 
         sem_post(sem_game_update);
         sleep(2);
@@ -168,7 +197,7 @@ int main() {
     }
 
     pthread_t game_thread;
-    if (pthread_create(&game_thread, NULL, game_update_thread, NULL) != 0) {
+    if (pthread_create(&game_thread, NULL, game_update_thread, &client_socket) != 0) {
         perror("Failed to create game update thread");
         cleanup_resources(server_fd, client_socket);
         exit(EXIT_FAILURE);
