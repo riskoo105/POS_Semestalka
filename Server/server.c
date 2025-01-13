@@ -39,7 +39,7 @@ void draw_game_to_buffer(const Game *game, char *buffer) {
     }
     // Pridanie informácií o ovocí a dĺžke hry
     int fruits_eaten = game->snake.length - 1;
-    int game_duration = (int)difftime(time(NULL), game->start_time);
+    int game_duration = (int)(difftime(time(NULL), game->start_time) - game->total_pause_time);
 
     index += snprintf(buffer + index, BUFFER_SIZE - index,
                       "Ovocie: %d\nDĺžka hry: %d sekúnd\n",
@@ -48,7 +48,7 @@ void draw_game_to_buffer(const Game *game, char *buffer) {
     buffer[index] = '\0'; // Null terminátor
 }
 
-// Thread to handle periodic game updates
+// Thread to handle game updates
 void *game_update_thread(void *arg) {
     int client_socket = *(int *)arg;
     char game_buffer[BUFFER_SIZE];
@@ -67,11 +67,14 @@ void *game_update_thread(void *arg) {
             if (!game->paused_message_sent) {
                 printf("Hra zastavená. Čakanie kým hráč obnoví hru...\n");
                 game->paused_message_sent = 1;
+                game->pause_start = time(NULL); // Zaznamenaj začiatok pauzy
             }
             sem_post(sem_game_update);
             sleep(1);
             continue;
         } else if (game->paused_message_sent) {
+            time_t pause_end = time(NULL); // Zaznamenaj koniec pauzy
+            game->total_pause_time += difftime(pause_end, game->pause_start); // Pripočítaj čas pauzy
             printf("Hra zastavená. Čakanie, pohyb začne o 3 sekundy...\n");
             game->paused_message_sent = 0;
             sem_post(sem_game_update);
@@ -94,6 +97,13 @@ void *game_update_thread(void *arg) {
         if (game->snake.alive && !move_snake(game)) {
             printf("Hra skončila: Had narazil do prekážky alebo do seba.\n");
             game->snake.alive = 0;
+        }
+
+        if (!game->snake.alive) {
+            snprintf(game_buffer, BUFFER_SIZE, "Hra skončila! Zjedeného ovocia: %d\n",
+                     game->snake.length - 1);
+            send(client_socket, game_buffer, strlen(game_buffer), 0);
+            break;
         }
 
         if (points_equal(game->snake.body[0], game->fruit)) {

@@ -38,6 +38,8 @@ typedef struct {
     int **obstacles;      // 2D array for obstacles
     PlayerStatus player_status; // Stav hráča
     int paused_message_sent;
+    time_t pause_start; // Čas, kedy sa hra pozastavila
+    time_t total_pause_time; // Celkový čas strávený v pauze
 } Game;
 
 int points_equal(Point a, Point b);

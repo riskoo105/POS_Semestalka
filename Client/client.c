@@ -37,7 +37,8 @@ void *receive_updates(void *arg) {
         int bytes_read = read(sock, buffer, BUFFER_SIZE);
         if (bytes_read <= 0) {
             printf("Server odpojený\n");
-            exit(0);
+            close(sock); // Uzavretie socketu
+            pthread_exit(NULL); // Ukončenie vlákna
         }
         buffer[bytes_read] = '\0';
 
@@ -46,10 +47,12 @@ void *receive_updates(void *arg) {
         printf("%s\n", buffer);
 
         // Kontrola ukončenia hry
-        if (strstr(buffer, "Game Over") != NULL) {
-            printf("Hra skončila. Vraciame sa do hlavného menu...\n");
+        if (strstr(buffer, "Hra skončila") != NULL) {
+            printf("%s\n", buffer);
+            printf("Hra skončila. Ukončujem aplikáciu...\n");
             game_active = 0;
-            break;
+            close(sock);
+            exit(0);
         }
     }
     return NULL;
@@ -128,6 +131,8 @@ void start_new_game() {
 
 void main_menu() {
     int choice;
+    pthread_t send_thread;
+
     while (1) {
         printf("\n--- Hlavné Menu ---\n");
         printf("1. Nová hra\n");
@@ -139,7 +144,6 @@ void main_menu() {
         switch (choice) {
             case 1:
                 start_new_game();
-                pthread_t send_thread;
                 pthread_create(&send_thread, NULL, send_updates, NULL);
                 pthread_join(send_thread, NULL);
 
@@ -166,6 +170,9 @@ void main_menu() {
                 break;
             case 3:
                 printf("Ukončujem aplikáciu...\n");
+
+                // Uvoľnenie zdrojov
+                pthread_mutex_destroy(&send_mutex);
                 close(sock);
                 exit(0);
             default:
@@ -204,6 +211,7 @@ int main() {
     main_menu();
 
     pthread_cancel(receive_thread);
+    pthread_join(receive_thread, NULL);
     pthread_mutex_destroy(&send_mutex);
     close(sock);
     return 0;

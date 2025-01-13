@@ -19,6 +19,8 @@ void initialize_game(Game *game, int width, int height, int mode, int time_limit
     game->mode = mode;
     game->time_limit = time_limit;
     game->start_time = time(NULL);
+    game->pause_start = 0;
+    game->total_pause_time = 0;
     game->world_type = world_type;
 
     // Inicializácia stavu hráča
