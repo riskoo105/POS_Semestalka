@@ -12,6 +12,7 @@ set(GAME_LOGIC_DIR ${CMAKE_SOURCE_DIR}/Game_logic)
 add_executable(server
         ${GAME_LOGIC_DIR}/game_logic.c
         ${SERVER_DIR}/server.c
+        Server/server.h
 )
 target_include_directories(server PRIVATE ${GAME_LOGIC_DIR})
 target_link_libraries(server pthread)
@@ -20,6 +21,7 @@ target_link_libraries(server pthread)
 add_executable(client
         ${GAME_LOGIC_DIR}/game_logic.c
         ${CLIENT_DIR}/client.c
+        Client/client.h
 )
 target_include_directories(client PRIVATE ${GAME_LOGIC_DIR})
 target_link_libraries(client pthread)

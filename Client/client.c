@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <termios.h>
+#include "client.h"
 
 #define PORT 45544
 #define BUFFER_SIZE 1024

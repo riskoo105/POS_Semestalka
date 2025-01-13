@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <semaphore.h>
 #include "../Game_logic/game_logic.h"
+#include "server.h"
 
 #define PORT 45544
 #define BUFFER_SIZE 1024

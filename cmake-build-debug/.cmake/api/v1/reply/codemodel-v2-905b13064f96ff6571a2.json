@@ -43,21 +43,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-client-Debug-33b869d9f562b9c346e3.json",
+					"jsonFile" : "target-client-Debug-611020c306e5cb9f8b1a.json",
 					"name" : "client",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "run::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-run-Debug-78b75bbd4f44a029016a.json",
+					"jsonFile" : "target-run-Debug-27a7e7b2d83515ea9022.json",
 					"name" : "run",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-69cc44f3b3a970f64a00.json",
+					"jsonFile" : "target-server-Debug-15323f8e62eee2312703.json",
 					"name" : "server",
 					"projectIndex" : 0
 				}
