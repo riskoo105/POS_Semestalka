@@ -47,6 +47,7 @@ void *receive_updates(void *arg) {
 
         // Kontrola ukončenia hry
         if (strstr(buffer, "Game Over") != NULL) {
+            printf("Hra skončila. Vraciame sa do hlavného menu...\n");
             game_active = 0;
             break;
         }
@@ -130,8 +131,8 @@ void main_menu() {
     while (1) {
         printf("\n--- Hlavné Menu ---\n");
         printf("1. Nová hra\n");
-        printf("2. Pokračovanie v hre\n");
-        printf("3. Quit\n");
+        printf("2. Pokračovať v hre\n");
+        printf("3. Skonči\n");
         printf("Vaša voľba: ");
         scanf("%d", &choice);
 
@@ -141,6 +142,11 @@ void main_menu() {
                 pthread_t send_thread;
                 pthread_create(&send_thread, NULL, send_updates, NULL);
                 pthread_join(send_thread, NULL);
+
+                // Po skončení hry sa vráťte do hlavného menu
+                if (!game_active) {
+                    printf("Vraciame sa do hlavného menu...\n");
+                }
                 break;
             case 2:
                 if (game_active) {
@@ -192,7 +198,7 @@ int main() {
         return -1;
     }
 
-    printf("Pripojené k serveru\n");
+    printf("Connected to server\n");
     pthread_create(&receive_thread, NULL, receive_updates, NULL);
 
     main_menu();

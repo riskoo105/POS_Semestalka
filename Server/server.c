@@ -37,6 +37,14 @@ void draw_game_to_buffer(const Game *game, char *buffer) {
         }
         buffer[index++] = '\n'; // Ukončenie riadku
     }
+    // Pridanie informácií o ovocí a dĺžke hry
+    int fruits_eaten = game->snake.length - 1;
+    int game_duration = (int)difftime(time(NULL), game->start_time);
+
+    index += snprintf(buffer + index, BUFFER_SIZE - index,
+                      "Ovocie: %d\nDĺžka hry: %d sekúnd\n",
+                      fruits_eaten, game_duration);
+
     buffer[index] = '\0'; // Null terminátor
 }
 
@@ -50,21 +58,21 @@ void *game_update_thread(void *arg) {
         sem_wait(sem_game_update);
 
         if (!game->player_status.active) {
-            printf("Player has left the game. Snake removed.\n");
+            printf("Hráč sa odpojil. Had vymazaný.\n");
             sem_post(sem_game_update);
             break;
         }
 
         if (game->player_status.paused) {
             if (!game->paused_message_sent) {
-                printf("Game paused. Waiting for player to resume...\n");
+                printf("Hra zastavená. Čakanie kým hráč obnoví hru...\n");
                 game->paused_message_sent = 1;
             }
             sem_post(sem_game_update);
             sleep(1);
             continue;
         } else if (game->paused_message_sent) {
-            printf("Game paused. Waiting will move in 3 seconds...\n");
+            printf("Hra zastavená. Čakanie, pohyb začne o 3 sekundy...\n");
             game->paused_message_sent = 0;
             sem_post(sem_game_update);
             sleep(3);
@@ -78,13 +86,13 @@ void *game_update_thread(void *arg) {
         if (game->mode == TIMED) {
             time_t current_time = time(NULL);
             if (difftime(current_time, game->start_time) >= game->time_limit) {
-                printf("Time's up! Game over.\n");
+                printf("Čas vypršal! Hra skončila.\n");
                 game->snake.alive = 0;
             }
         }
 
         if (game->snake.alive && !move_snake(game)) {
-            printf("Game over: Snake hit an obstacle or itself.\n");
+            printf("Hra skončila: Had narazil do prekážky alebo do seba.\n");
             game->snake.alive = 0;
         }
 
@@ -224,7 +232,7 @@ int main() {
                 sem_wait(sem_game_update);
                 game->player_status.paused = 0;
                 sem_post(sem_game_update);
-                printf("Waiting 3 seconds before resuming the game...\n");
+                printf("Čakanie 3 sekundy pred obnovením hry...\n");
                 sleep(3);
             }else {
                 int new_direction = atoi(buffer);
@@ -240,14 +248,14 @@ int main() {
             break;
         }
 
-        snprintf(buffer, BUFFER_SIZE, "Snake: (%d, %d), Fruit: (%d, %d) - Game Status: %s",
+        snprintf(buffer, BUFFER_SIZE, "Had: (%d, %d), Ovocie: (%d, %d) - Status hry: %s",
                  game->snake.body[0].x, game->snake.body[0].y,
                  game->fruit.x, game->fruit.y,
-                 game->snake.alive ? "Alive" : "Game Over");
+                 game->snake.alive ? "Živý" : "Hra skončila");
         send(client_socket, buffer, strlen(buffer), 0);
     }
 
-    snprintf(buffer, BUFFER_SIZE, "Game Over! Fruits eaten: %d", game->snake.length - 1);
+    snprintf(buffer, BUFFER_SIZE, " Hra skončila! Zjedeného ovocia: %d", game->snake.length - 1);
     send(client_socket, buffer, strlen(buffer), 0);
 
     pthread_join(game_thread, NULL);
